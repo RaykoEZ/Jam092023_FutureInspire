@@ -1,0 +1,27 @@
+!*.png
+!*.asset
+!*/Assets/AddressableAssetsData/*
+*.vsidx
+*.psd
+*.psd.meta
+*.pdf
+*.pdf.meta
+*.suo
+*.sln
+*.csproj
+*.cache
+*.log
+*.wav
+*.mp4
+Assets/TextMesh Pro*
+Assets/Art/SFXPackages*
+Assets/Samples/*
+Assets/StreamingAssets/aa/*
+Packages/*
+/[Ll]ibrary/*
+/[Tt]emp/*
+/[Oo]bj/*
+/[Bb]uild/*
+/[Bb]uilds/*
+/[Ll]ogs/*
+/[Uu]ser[Ss]ettings/*
