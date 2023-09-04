@@ -1,0 +1,13 @@
+using UnityEngine;
+
+#NOTRIM#
+public class #SCRIPTNAME# : HangingItem
+{
+    #NOTRIM#
+    public override void ActivateEffect(Hand hand, DropItem item)
+    {
+        #NOTRIM#
+        // custom effects here
+        #NOTRIM#
+    }
+}

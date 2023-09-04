@@ -12,6 +12,7 @@ public class Hand : MonoBehaviour
     }
     public void LaunchItem()
     {
+        if (m_itemInHand == null) return;
         m_itemInHand?.Launch(Vector2.up, m_handProperty.MaxLaunchPower);
         OnDropItemLeave(m_itemInHand);
     }
