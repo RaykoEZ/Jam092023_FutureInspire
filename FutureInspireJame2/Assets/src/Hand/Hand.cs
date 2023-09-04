@@ -3,17 +3,17 @@ using UnityEngine;
 public class Hand : MonoBehaviour 
 {
     [SerializeField] HandProperty m_handProperty = default;
-    [SerializeField] DropItemDetector m_detect = default;
     DropItem m_itemInHand;
     Coroutine m_burning;
-    private void Start()
-    {
-        m_detect.OnItemLanded += OnDropItemLand;
-    }
-    public void LaunchItem()
+    // Launch item with player mouse swing direction
+    public void LaunchItem(float xInfluence)
     {
         if (m_itemInHand == null) return;
-        m_itemInHand?.Launch(Vector2.up, m_handProperty.MaxLaunchPower);
+        Vector2 v = m_itemInHand.GetComponent<Rigidbody2D>().velocity;
+        Vector2 reflect = v - (2f * Vector2.Dot(v, Vector2.up)) * Vector2.up;
+        // Add in horizontal direction influence from player pointer motion
+        reflect.x += 5f * xInfluence;
+        m_itemInHand?.Launch(reflect, m_handProperty.MaxLaunchPower);
         OnDropItemLeave(m_itemInHand);
     }
     public void OnDropItemLeave(DropItem item) 
@@ -34,7 +34,6 @@ public class Hand : MonoBehaviour
     // not important right now, TODO: reduce hp and proc animation
     void TakeBurnDamage(int damage) 
     {
-        Debug.Log($"Taking {damage} damage.");
     }
     IEnumerator BurningHand() 
     {
