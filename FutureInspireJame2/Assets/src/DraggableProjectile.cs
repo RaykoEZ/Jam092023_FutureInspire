@@ -1,7 +1,6 @@
 using Curry.Util;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEditor.Progress;
 
 // For anything that can take a hit from something
 public interface IHittable 
@@ -25,6 +24,10 @@ public class DraggableProjectile : DraggableObject
     // Log player cursor movement when dragging, we need this for getting launch direction
     Vector3 m_currentPos;
     Vector3 m_prevPos;
+    private void Start()
+    {
+        Collider.isTrigger = true;
+    }
     private void OnCollisionEnter2D(Collision2D col) 
     {
         // Hittable targets get hit
@@ -36,6 +39,9 @@ public class DraggableProjectile : DraggableObject
         {
             push.Push(Rb2d.velocity.normalized, m_pushPower);
         }
+        Vector2 n = col.contacts[0].normal;
+        // Project hits one target and destroys itself for now
+        Rebound(n, col.relativeVelocity);
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
@@ -71,8 +77,16 @@ public class DraggableProjectile : DraggableObject
             Draggable = true; 
         }
     }
-    public void Launch(Vector2 dirNormalized, float power = 5f) 
+    public void Launch(Vector2 dirNormalized, float power = 10f) 
     {
+        // switch on collision
+        Collider.isTrigger = false;
         Rb2d.velocity = dirNormalized * power;
+    }
+    void Rebound(Vector2 normal, Vector2 relativeV) 
+    {
+        Vector2 v = Rb2d.velocity;
+        Vector2 reflect = v - (2f * Vector2.Dot(v, normal)) * normal;
+        Rb2d.velocity = reflect + 0.8f * relativeV;
     }
 }
