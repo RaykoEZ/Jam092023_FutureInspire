@@ -1,9 +1,8 @@
-using System.Runtime.ConstrainedExecution;
-using System.Text;
 using UnityEngine;
 public class HandController : MonoBehaviour
 {
     [SerializeField] Hand m_hand = default;
+    [SerializeField] ItemLauncher m_launcher = default;
     [SerializeField] DropItemDetector m_detect = default;
     Vector3 m_currentPos;
     Vector3 m_prevPos;
@@ -21,7 +20,7 @@ public class HandController : MonoBehaviour
         // if mouse button not held, we launch immediately
         if (!Input.GetMouseButton(0))
         {
-            m_hand?.LaunchItem(m_pointerXInfluence);
+            m_launcher?.LaunchItem(m_hand.ItemInHand, m_launcher.MaxLaunchPower, m_pointerXInfluence);
         }
         // hold food in hand if mouse button held down
         else 
@@ -49,7 +48,7 @@ public class HandController : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0)) 
         {
-            m_hand.LaunchItem(m_pointerXInfluence);
+            m_launcher.LaunchItem(m_hand.ItemInHand, m_launcher.MaxLaunchPower, m_pointerXInfluence);
         }
     }
 }

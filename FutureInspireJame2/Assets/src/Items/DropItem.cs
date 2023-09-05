@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+[RequireComponent(typeof(Collider2D))]
 // For all items that drops down for us to toss, mostly food
 public class DropItem : MonoBehaviour 
 {
