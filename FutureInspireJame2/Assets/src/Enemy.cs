@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+// a basic enemy unit that moves towards the home base until death
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour, IHittable, IPushable
 {
@@ -49,7 +50,7 @@ public class Enemy : MonoBehaviour, IHittable, IPushable
 
     public void StartMoving() 
     {
-        if(m_movement == null) 
+        if(m_movement == null && m_target != null) 
         {
             m_movement = StartCoroutine(Movement());
         }
