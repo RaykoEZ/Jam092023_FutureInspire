@@ -222,9 +222,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 850265225}
   offset: 0
-<<<<<<< Updated upstream
-  damping: 0.3
-=======
   damping: 0.5
 --- !u!1 &774698915
 GameObject:
@@ -371,7 +368,6 @@ LineRenderer:
   m_UseWorldSpace: 0
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
->>>>>>> Stashed changes
 --- !u!1 &850265223
 GameObject:
   m_ObjectHideFlags: 0
