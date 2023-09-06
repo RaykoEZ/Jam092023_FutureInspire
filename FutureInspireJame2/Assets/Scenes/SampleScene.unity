@@ -287,6 +287,7 @@ GameObject:
   - component: {fileID: 1917207273}
   - component: {fileID: 1917207275}
   - component: {fileID: 1917207274}
+  - component: {fileID: 1917207276}
   m_Layer: 0
   m_Name: PlayerAttack
   m_TagString: Untagged
@@ -316,10 +317,10 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1917207272}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -350,6 +351,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9af97b36e088aa48b6d1c90e9f88f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1917207276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917207272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bebf08300c44e34282fee6094fd10b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDuration: 0.1
 --- !u!1 &2087921084
 GameObject:
   m_ObjectHideFlags: 0
