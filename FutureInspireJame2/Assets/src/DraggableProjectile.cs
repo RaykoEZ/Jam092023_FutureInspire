@@ -55,7 +55,6 @@ public class DraggableProjectile : DraggableObject
     {
         if (Draggable) 
         {
-            m_dragging = true;
             Rb2d.velocity = Vector2.zero;
             base.OnBeginDrag(eventData);
             m_currentPos = eventData.pressEventCamera.ScreenToWorldPoint(eventData.position);
