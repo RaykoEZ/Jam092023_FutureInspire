@@ -17,14 +17,10 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
-    {
-        horizontal = Input.GetAxisRaw("Horizontal"); 
-        vertical = Input.GetAxisRaw("Vertical"); 
-    }
-
     void FixedUpdate()
     {
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
         if (horizontal != 0 && vertical != 0) 
         {
             horizontal *= moveLimiter;

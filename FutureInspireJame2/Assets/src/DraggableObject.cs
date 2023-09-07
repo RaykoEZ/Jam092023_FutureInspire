@@ -62,7 +62,7 @@ namespace Curry.Util
         {
             DropObject(m_origin, m_originIndex);
         }
-        void SetDragPosition(PointerEventData e)
+        protected void SetDragPosition(PointerEventData e)
         {
             Vector2 worldPos = e.pressEventCamera.ScreenToWorldPoint(e.position - m_anchorOffset);
             GetComponent<RectTransform>().position = worldPos;

@@ -39,15 +39,23 @@ public class DraggableProjectile : DraggableObject
         {
             push.Push(Rb2d.velocity.normalized, m_pushPower);
         }
-        Vector2 n = col.contacts[0].normal;
-        // Project hits one target and destroys itself for now
-        Rebound(n, col.relativeVelocity);
+        if(col.contacts.Length > 0) 
+        {
+            Vector2 n = col.contacts[0].normal;
+            // Project hits one target and destroys itself for now
+            Rebound(n, col.relativeVelocity);
+        }
+        else 
+        {
+            Rebound(Rb2d.velocity.normalized, Vector2.zero);
+        }
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
     {
         if (Draggable) 
         {
+            m_dragging = true;
             Rb2d.velocity = Vector2.zero;
             base.OnBeginDrag(eventData);
             m_currentPos = eventData.pressEventCamera.ScreenToWorldPoint(eventData.position);
@@ -61,7 +69,6 @@ public class DraggableProjectile : DraggableObject
         m_prevPos = m_currentPos;
         m_currentPos = eventData.pressEventCamera.ScreenToWorldPoint(eventData.position);
     }
-    
     public override void OnEndDrag(PointerEventData eventData)
     {
         if (!Draggable) { return; }
