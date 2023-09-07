@@ -8,6 +8,7 @@ namespace Curry.Game
     // Displays circular/polygon range with polygon collider 2D
     [RequireComponent(typeof(MeshFilter))]
     [RequireComponent(typeof(MeshRenderer))]
+    [ExecuteAlways]
     public class RadialRangeRenderer : MonoBehaviour
     {
         // How many sides to generate for the circle/polygon
@@ -40,19 +41,24 @@ namespace Curry.Game
             m_renderMesh = new Mesh();
             m_renderMesh.name = "RangeMesh";
             m_meshFilter.mesh = m_renderMesh;
+            UpdateRenderSettings();
+            RenderMesh();
+        }
+        void UpdateRenderSettings() 
+        {
             m_angleInterval = m_fov / m_rayCount;
             m_verts = new List<Vector3>(new Vector3[m_rayCount + 2]);
             m_verts[0] = Vector3.zero;
             m_triangles = new List<int>(new int[m_rayCount * 3]);
         }
-
-        protected virtual void LateUpdate()
+        protected virtual void OnValidate()
         {
+            UpdateRenderSettings();
             RenderMesh();
         }
-
         protected virtual void RenderMesh() 
         {
+            if (m_renderMesh == null) return;
             if(Mathf.Approximately(m_viewRadius, 0f)) 
             {
                 return;

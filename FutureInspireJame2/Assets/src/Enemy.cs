@@ -11,7 +11,6 @@ public class Enemy : MonoBehaviour, IHittable, IPushable
     // unit to move per movement call
     [Range(0.1f, 1f)]
     [SerializeField] float m_moveInterval = default;
-    [SerializeField] Transform m_base = default;
     int m_currentHp;
     Coroutine m_movement;
     Transform m_target;
@@ -19,11 +18,6 @@ public class Enemy : MonoBehaviour, IHittable, IPushable
     void Awake() 
     {
         m_currentHp = m_maxHp;
-    }
-    void Start() 
-    {
-        m_target = m_base;
-        StartMoving();
     }
     public void Init(Transform target) 
     {

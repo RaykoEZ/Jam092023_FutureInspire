@@ -1,4 +1,5 @@
 using Curry.Util;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -24,6 +25,7 @@ public class DraggableProjectile : DraggableObject
     // Log player cursor movement when dragging, we need this for getting launch direction
     Vector3 m_currentPos;
     Vector3 m_prevPos;
+    bool m_followMouse = false;
     private void Start()
     {
         Collider.isTrigger = true;
@@ -53,34 +55,39 @@ public class DraggableProjectile : DraggableObject
 
     public override void OnBeginDrag(PointerEventData eventData)
     {
-        if (Draggable) 
-        {
-            Rb2d.velocity = Vector2.zero;
-            base.OnBeginDrag(eventData);
-            m_currentPos = eventData.pressEventCamera.ScreenToWorldPoint(eventData.position);
-        }
+        m_followMouse = true;
+        Rb2d.velocity = Vector2.zero;
+        base.OnBeginDrag(eventData);
+        m_currentPos = eventData.pressEventCamera.ScreenToWorldPoint(eventData.position);
+        StartCoroutine(FollowMouse());
     }
     public override void OnDrag(PointerEventData eventData)
     {
-        if (!Draggable) { return; }
+        //base.OnDrag(eventData);
             // Do not move when drag is held, if the object needs to do something else
-            base.OnDrag(eventData);
-        m_prevPos = m_currentPos;
-        m_currentPos = eventData.pressEventCamera.ScreenToWorldPoint(eventData.position);
+        //m_prevPos = m_currentPos;
+        //m_currentPos = eventData.pressEventCamera.ScreenToWorldPoint(eventData.position);
     }
     public override void OnEndDrag(PointerEventData eventData)
     {
-        if (!Draggable) { return; }
         Vector2 dir = m_currentPos - m_prevPos;
         //if player pointer movement is idle, do not launch
-        if(Vector2.SqrMagnitude(dir) > 0.01f) 
+        if (Vector2.SqrMagnitude(dir) > 0.01f) 
         {
             Launch(dir.normalized);
-            Draggable = false;
         }
-        else 
-        { 
-            Draggable = true; 
+        m_followMouse = false;
+    }
+    IEnumerator FollowMouse() 
+    {
+        while (m_followMouse) 
+        {
+            yield return new WaitForEndOfFrame();
+            m_prevPos = m_currentPos;
+            m_currentPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //mouse pos z is unwanted
+            m_currentPos.z = transform.position.z;
+            UpdatePosition(m_currentPos);
         }
     }
     public void Launch(Vector2 dirNormalized, float power = 10f) 
