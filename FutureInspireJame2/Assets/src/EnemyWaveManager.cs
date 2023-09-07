@@ -17,6 +17,11 @@ public class EnemyWaveManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(OnStartGame());
+    }
+    IEnumerator OnStartGame() 
+    {
+        yield return new WaitForSeconds(3f);
         StartWave();
     }
     public void StartWave() 
