@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void OnWaveStart(int waveNumber);
 public class EnemyWaveManager : MonoBehaviour
 {
     [SerializeField] List<EnemyWaveDetail> m_waves = default;
     [SerializeField] List<EnemySpawner> m_spawners = default;
     [SerializeField] PlayerHomeBase m_playerBase;
     Coroutine m_spawnWave;
+    public event OnWaveStart OnStart;
     // current wave number
     int m_currentWave = 0;
     public int CurrentWave => m_currentWave;
@@ -38,6 +40,7 @@ public class EnemyWaveManager : MonoBehaviour
             List<EnemySpawner> spawners = SamplingUtil.SampleFromList(
                 m_spawners, wave.GroupsToSpawn.Count, uniqueResults: false);
             int i = 0;
+            OnStart?.Invoke(m_currentWave + 1);
             foreach (var group in wave.GroupsToSpawn)
             {
                 // spawn the group

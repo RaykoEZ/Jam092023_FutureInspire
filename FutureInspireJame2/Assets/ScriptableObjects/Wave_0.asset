@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d2c7ad075cfa1d4f8926ecc720b7cdd, type: 3}
   m_Name: Wave_0
   m_EditorClassIdentifier: 
-  m_secondsBeforeNextWave: 30
+  m_secondsBeforeNextWave: 20
   m_groupsToSpawn:
-  - m_numToSpawn: 5
+  - m_numToSpawn: 3
+    m_spawnRef: {fileID: 3764971147356426963, guid: b2393a6ddb471264caff44ee1dd45a20, type: 3}
+  - m_numToSpawn: 3
     m_spawnRef: {fileID: 3764971147356426963, guid: b2393a6ddb471264caff44ee1dd45a20, type: 3}
