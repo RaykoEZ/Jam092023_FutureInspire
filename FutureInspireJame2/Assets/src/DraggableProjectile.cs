@@ -63,10 +63,6 @@ public class DraggableProjectile : DraggableObject
     }
     public override void OnDrag(PointerEventData eventData)
     {
-        //base.OnDrag(eventData);
-            // Do not move when drag is held, if the object needs to do something else
-        //m_prevPos = m_currentPos;
-        //m_currentPos = eventData.pressEventCamera.ScreenToWorldPoint(eventData.position);
     }
     public override void OnEndDrag(PointerEventData eventData)
     {
