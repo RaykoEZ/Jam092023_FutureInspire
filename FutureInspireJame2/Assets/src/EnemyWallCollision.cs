@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class EnemyWallCollision : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (other.CompareTag("Wall"))
+        if (col.gameObject.TryGetComponent(out EnemyBounds bounds))
         {
-            Enemy enemy = GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                enemy.OnDefeated();
-            }
+            bounds?.Enemy?.OnDefeated();           
         }
     }
 }

@@ -11,6 +11,7 @@ public struct EnemySpawnItem
     public Enemy SpawnRef => m_spawnRef;
 }
 //Contains all enemies to spawn in a wave
+[CreateAssetMenu(fileName = "Wave_", menuName = "Jams/EnemySpawning/Create a new enemy wave detail", order = 1)]
 public class EnemyWaveDetail : ScriptableObject 
 {
     // time to wait before next wave, start counting down after we spawned all enemies in this wave 

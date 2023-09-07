@@ -4,10 +4,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 // For anything that can take a hit from something
-public interface IHittable 
-{
-    public void TakeHit(int damage);
-}
 // Anything that can be pushed away by a force
 public interface IPushable 
 {
@@ -18,7 +14,6 @@ public interface IPushable
 [RequireComponent(typeof(Rigidbody2D))]
 public class DraggableProjectile : DraggableObject
 {
-    [SerializeField] int m_damage = default;
     [SerializeField] float m_pushPower = default;
     protected Collider2D Collider => GetComponent<Collider2D>();
     protected Rigidbody2D Rb2d => GetComponent<Rigidbody2D>();
@@ -32,11 +27,7 @@ public class DraggableProjectile : DraggableObject
     }
     private void OnCollisionEnter2D(Collision2D col) 
     {
-        // Hittable targets get hit
-        if (col.gameObject.TryGetComponent(out IHittable hit))
-        {
-            hit.TakeHit(m_damage);
-        }
+        // push pushable target
         if (col.gameObject.TryGetComponent(out IPushable push))
         {
             push.Push(Rb2d.velocity.normalized, m_pushPower);
@@ -56,6 +47,7 @@ public class DraggableProjectile : DraggableObject
     public override void OnBeginDrag(PointerEventData eventData)
     {
         m_followMouse = true;
+        Collider.isTrigger = true;
         Rb2d.velocity = Vector2.zero;
         base.OnBeginDrag(eventData);
         m_currentPos = eventData.pressEventCamera.ScreenToWorldPoint(eventData.position);
@@ -70,6 +62,7 @@ public class DraggableProjectile : DraggableObject
         //if player pointer movement is idle, do not launch
         if (Vector2.SqrMagnitude(dir) > 0.01f) 
         {
+            Collider.isTrigger = false;
             Launch(dir.normalized);
         }
         m_followMouse = false;
