@@ -2,22 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// a basic enemy unit that moves towards the home base until death
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour, IHittable, IPushable
 {
     [Range(1f, 999999f)]
     [SerializeField] int m_maxHp = default;
-    // unit to move per movement call
     [Range(0.1f, 1f)]
     [SerializeField] float m_moveInterval = default;
     int m_currentHp;
     Coroutine m_movement;
     Transform m_target;
     Rigidbody2D rb => GetComponent<Rigidbody2D>();
+    private EnemyWallCollision collisionHandler;
     void Awake() 
     {
+        EnemyWallCollision collisionHandler = gameObject.AddComponent<EnemyWallCollision>();
+        collisionHandler = GetComponent<EnemyWallCollision>();
+        Collider2D collider = GetComponent<Collider2D>();
         m_currentHp = m_maxHp;
+        collider.isTrigger = true;
     }
     public void Init(Transform target) 
     {
