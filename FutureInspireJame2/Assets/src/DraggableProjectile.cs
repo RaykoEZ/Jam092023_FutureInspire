@@ -79,7 +79,7 @@ public class DraggableProjectile : DraggableObject
             UpdatePosition(m_currentPos);
         }
     }
-    public void Launch(Vector2 dirNormalized, float power = 10f) 
+    public void Launch(Vector2 dirNormalized, float power = 1000f) 
     {
         // switch on collision
         Collider.isTrigger = false;

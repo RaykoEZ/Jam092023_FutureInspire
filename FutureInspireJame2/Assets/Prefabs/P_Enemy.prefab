@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5772861717870931470}
   - component: {fileID: 4381751891835301096}
   - component: {fileID: 1059480935076117128}
+  - component: {fileID: 1219984347422381702}
   m_Layer: 0
   m_Name: BoundCheck
   m_TagString: Untagged
@@ -77,6 +78,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemy: {fileID: 3764971147356426963}
+--- !u!114 &1219984347422381702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392920566866066563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203102467ffb78e45848e6df58cdcbe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_attackTimeInterval: 3
 --- !u!1 &3764971147356426962
 GameObject:
   m_ObjectHideFlags: 0
