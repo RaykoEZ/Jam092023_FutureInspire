@@ -13,7 +13,6 @@ public class EnemyWaveManager : MonoBehaviour
     // current wave number
     int m_currentWave = 0;
     int m_numEnemies = 0;
-    bool m_playerClearedWaveEarly = false;
     bool m_waitingForNextWave = false;
     public int CurrentWave => m_currentWave;
 
@@ -36,13 +35,13 @@ public class EnemyWaveManager : MonoBehaviour
     {
         if (m_spawnWave == null) return;
         StopCoroutine(m_spawnWave);
+        m_waitingForNextWave = false;
         m_spawnWave = null;
     }
     IEnumerator Spawn_Internal() 
     {
         while (m_currentWave < m_waves.Count) 
         {
-            Debug.Log($"Wave {m_currentWave}!");
             EnemyWaveDetail wave = m_waves[m_currentWave];
             // Choose random spawners from list of spawner
             List<EnemySpawner> spawners = SamplingUtil.SampleFromList(
@@ -78,7 +77,10 @@ public class EnemyWaveManager : MonoBehaviour
         m_numEnemies--;
         if(m_numEnemies == 0 && m_waitingForNextWave) 
         {
-            m_playerClearedWaveEarly = true;
+            m_waitingForNextWave = false;
+            PauseWave();
+            m_currentWave++;
+            StartWave();
         }
     }
 }
