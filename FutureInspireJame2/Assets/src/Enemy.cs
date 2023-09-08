@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+public delegate void OnEnemyDefeat(Enemy defeated);
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour, IPushable
 {
@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour, IPushable
     [SerializeField] float m_moveInterval = default;
     Coroutine m_movement;
     Transform m_target;
+    public event OnEnemyDefeat OnDefeat;
     public void Init(Transform target) 
     {
         m_target = target;
@@ -21,6 +22,7 @@ public class Enemy : MonoBehaviour, IPushable
     public void OnDefeated() 
     {
         StopMoving();
+        OnDefeat?.Invoke(this);
         Destroy(gameObject);
     }
 

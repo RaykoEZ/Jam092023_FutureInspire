@@ -12,6 +12,9 @@ public class EnemyWaveManager : MonoBehaviour
     public event OnWaveStart OnStart;
     // current wave number
     int m_currentWave = 0;
+    int m_numEnemies = 0;
+    bool m_playerClearedWaveEarly = false;
+    bool m_waitingForNextWave = false;
     public int CurrentWave => m_currentWave;
 
     // Start is called before the first frame update
@@ -50,11 +53,15 @@ public class EnemyWaveManager : MonoBehaviour
             {
                 // spawn the group
                 spawners[i].SpawnEnemies(group.SpawnRef, group.NumToSpawn, 0.1f, InitEnenmy);
+                // increment enemy count
+                m_numEnemies += group.NumToSpawn;
                 i++;
                 yield return new WaitForSeconds(0.9f);
             }
             // after spawning, wait for a set duration
+            m_waitingForNextWave = true;
             yield return new WaitForSeconds(wave.SecondsBeforeNextWave);
+            m_waitingForNextWave = false;
             // Increment to spawn next wave
             m_currentWave++;
         }
@@ -63,5 +70,15 @@ public class EnemyWaveManager : MonoBehaviour
     void InitEnenmy(Enemy spawned) 
     {
         spawned.Init(m_playerBase.transform);
+        spawned.OnDefeat += OnEnemyDefeated;
+    }
+    void OnEnemyDefeated(Enemy defeated) 
+    {
+        defeated.OnDefeat -= OnEnemyDefeated;
+        m_numEnemies--;
+        if(m_numEnemies == 0 && m_waitingForNextWave) 
+        {
+            m_playerClearedWaveEarly = true;
+        }
     }
 }
