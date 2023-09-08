@@ -1,3 +1,4 @@
+using Curry.UI;
 using Curry.Util;
 using System.Collections;
 using UnityEngine;
@@ -15,6 +16,9 @@ public interface IPushable
 public class DraggableProjectile : DraggableObject
 {
     [SerializeField] float m_pushPower = default;
+    [SerializeField] AudioManager m_hitSfx = default;
+    [SerializeField] AudioManager m_bounceSfx = default;
+    [SerializeField] AudioManager m_LaunchSfx = default;
     protected Collider2D Collider => GetComponent<Collider2D>();
     protected Rigidbody2D Rb2d => GetComponent<Rigidbody2D>();
     // Log player cursor movement when dragging, we need this for getting launch direction
@@ -30,9 +34,15 @@ public class DraggableProjectile : DraggableObject
         // push pushable target
         if (col.gameObject.TryGetComponent(out IPushable push))
         {
+            m_hitSfx?.PlayRandom();
             push.Push(Rb2d.velocity.normalized, m_pushPower);
         }
-        if(col.contacts.Length > 0) 
+        else 
+        {
+            // just play rebound sfx if we didn't hit a target
+            m_bounceSfx?.PlayRandom(0.8f);
+        }
+        if (col.contacts.Length > 0) 
         {
             Vector2 n = col.contacts[0].normal;
             // Project hits one target and destroys itself for now
@@ -81,6 +91,8 @@ public class DraggableProjectile : DraggableObject
     }
     public void Launch(Vector2 dirNormalized, float power = 1000f) 
     {
+        // a fixed chance to proc a launch sfx
+        m_LaunchSfx?.PlayRandom(0.8f);
         // switch on collision
         Collider.isTrigger = false;
         Rb2d.velocity = dirNormalized * power;
