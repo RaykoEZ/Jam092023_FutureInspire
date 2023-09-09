@@ -3,17 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Wall
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Walls
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Enemy
+  - Player
+  - Projectile
   - 
   - 
   - 
@@ -46,6 +47,9 @@ TagManager:
     locked: 0
   - name: Gameplay
     uniqueID: 3374329693
+    locked: 0
+  - name: FX
+    uniqueID: 1633559327
     locked: 0
   - name: UI
     uniqueID: 849147845

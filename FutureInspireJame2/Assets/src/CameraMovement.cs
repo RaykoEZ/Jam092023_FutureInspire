@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public Transform Player;
-    public float offset;
+    public RectTransform Player;
     public float damping;
     private Vector3 velocity = Vector3.zero;
-    void FixedUpdate()
+    void Update()
     {
-        Vector3 movePosition = new Vector3(Player.position.x + offset, Player.position.y + offset, -1);
+        Vector3 movePosition = new Vector3(Player.position.x, Player.position.y, transform.position.z);
         transform.position = Vector3.SmoothDamp(transform.position, movePosition, ref velocity, damping);
     }
 }
