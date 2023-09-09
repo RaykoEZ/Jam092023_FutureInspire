@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public delegate void OnWaveStart(int waveNumber);
+public delegate void OnAllWaveCleared();
 public class EnemyWaveManager : MonoBehaviour
 {
     [SerializeField] List<EnemyWaveDetail> m_waves = default;
     [SerializeField] List<EnemySpawner> m_spawners = default;
     [SerializeField] PlayerHomeBase m_playerBase;
     Coroutine m_spawnWave;
+    public event OnAllWaveCleared OnAllCleared;
     public event OnWaveStart OnStart;
     // current wave number
     int m_currentWave = 0;
@@ -75,12 +77,16 @@ public class EnemyWaveManager : MonoBehaviour
     {
         defeated.OnDefeat -= OnEnemyDefeated;
         m_numEnemies--;
-        if(m_numEnemies == 0 && m_waitingForNextWave) 
+        if(m_numEnemies == 0 && m_currentWave < m_waves.Count && m_waitingForNextWave) 
         {
             m_waitingForNextWave = false;
             PauseWave();
             m_currentWave++;
             StartWave();
+        }
+        else if (m_numEnemies == 0 && m_currentWave >= m_waves.Count) 
+        {
+            OnAllCleared?.Invoke();
         }
     }
 }
