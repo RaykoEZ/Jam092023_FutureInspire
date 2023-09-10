@@ -1,13 +1,43 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Playables;
+
+public class BossYeetus : Enemy , IPushable
+{
+    [SerializeField] float m_abilityCooldown = default;
+    [SerializeField] float m_chargeDuration = default;
+    [SerializeField] PlayableDirector m_director = default;
+    bool m_onCooldown = false;
+
+    void Update() 
+    { 
+        
+    }
+    void ActivateAbility() 
+    {
+        m_director?.Play();
+    }
+    IEnumerator StartChargn() 
+    {
+        yield return new WaitForSeconds(m_chargeDuration);
+        ActivateAbility();
+    }
+
+    IEnumerator Cooldown() 
+    {
+        yield return new WaitForSeconds(m_abilityCooldown);
+    }
+
+}
+
 public delegate void OnEnemyDefeat(Enemy defeated);
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour, IPushable
 {
     [SerializeField] float m_moveInterval = default;
     Coroutine m_movement;
-    Transform m_target;
+    protected Transform m_target;
     public event OnEnemyDefeat OnDefeat;
     public void Init(Transform target) 
     {
@@ -40,7 +70,7 @@ public class Enemy : MonoBehaviour, IPushable
             m_movement = null;
         }
     }
-    IEnumerator Push_Internal(Vector2 dirNormalize, float power) 
+    protected virtual IEnumerator Push_Internal(Vector2 dirNormalize, float power) 
     {
         StopMoving();
         GetComponent<Rigidbody2D>()?.AddForce(dirNormalize * power, ForceMode2D.Impulse);
