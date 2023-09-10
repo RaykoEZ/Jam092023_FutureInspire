@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public delegate void OnWaveStart(int waveNumber);
 public delegate void OnAllWaveCleared();
@@ -9,6 +10,9 @@ public class EnemyWaveManager : MonoBehaviour
     [SerializeField] List<EnemyWaveDetail> m_waves = default;
     [SerializeField] List<EnemySpawner> m_spawners = default;
     [SerializeField] PlayerHomeBase m_playerBase;
+    [SerializeField] PlayableDirector m_countdownDirector = default;
+    [SerializeField] AudioSource m_gameplayBgm = default;
+
     Coroutine m_spawnWave;
     public event OnAllWaveCleared OnAllCleared;
     public event OnWaveStart OnStart;
@@ -25,8 +29,13 @@ public class EnemyWaveManager : MonoBehaviour
     }
     IEnumerator OnStartGame() 
     {
+        yield return new WaitForSeconds(0.5f);
+        // stop bgm until we start next wave
+        m_countdownDirector.Play();
         yield return new WaitForSeconds(3f);
         StartWave();
+        yield return new WaitForSeconds(0.8f);
+        m_gameplayBgm?.Play();
     }
     public void StartWave() 
     {
@@ -50,6 +59,8 @@ public class EnemyWaveManager : MonoBehaviour
                 m_spawners, wave.GroupsToSpawn.Count, uniqueResults: false);
             int i = 0;
             OnStart?.Invoke(m_currentWave + 1);
+            // wait for wave countdown
+            yield return new WaitForSeconds(3f);
             foreach (var group in wave.GroupsToSpawn)
             {
                 // spawn the group
