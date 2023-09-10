@@ -2,6 +2,7 @@
 
 public static class GameUtil 
 {
+    // Spawn a gameobject a prefab reference (preferrably)
     public static T SpawnObject<T>(T spawnRef, Vector3 position, Transform parent = null) where T : MonoBehaviour
     {
         T ret = Object.Instantiate(spawnRef);
