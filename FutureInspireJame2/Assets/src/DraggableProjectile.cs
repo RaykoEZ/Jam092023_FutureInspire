@@ -15,10 +15,10 @@ public interface IPushable
 [RequireComponent(typeof(Rigidbody2D))]
 public class DraggableProjectile : DraggableObject
 {
-    [SerializeField] float m_pushPower = default;
-    [SerializeField] AudioManager m_hitSfx = default;
-    [SerializeField] AudioManager m_bounceSfx = default;
-    [SerializeField] AudioManager m_LaunchSfx = default;
+    [SerializeField] protected float m_pushPower = default;
+    [SerializeField] protected AudioManager m_hitSfx = default;
+    [SerializeField] protected AudioManager m_bounceSfx = default;
+    [SerializeField] protected AudioManager m_LaunchSfx = default;
     protected Collider2D Collider => GetComponent<Collider2D>();
     protected Rigidbody2D Rb2d => GetComponent<Rigidbody2D>();
     // Log player cursor movement when dragging, we need this for getting launch direction
@@ -29,13 +29,12 @@ public class DraggableProjectile : DraggableObject
     {
         Collider.isTrigger = true;
     }
-    private void OnCollisionEnter2D(Collision2D col) 
+    void OnCollisionEnter2D(Collision2D col) 
     {
         // push pushable target
         if (col.gameObject.TryGetComponent(out IPushable push))
         {
-            m_hitSfx?.PlayRandom();
-            push.Push(Rb2d.velocity.normalized, m_pushPower);
+            OnPush(push);
         }
         else 
         {
@@ -52,6 +51,12 @@ public class DraggableProjectile : DraggableObject
         {
             Rebound(Rb2d.velocity.normalized, Vector2.zero);
         }
+    }
+
+    protected virtual void OnPush(IPushable push) 
+    {
+        m_hitSfx?.PlayRandom();
+        push.Push(Rb2d.velocity.normalized, m_pushPower);
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
@@ -89,7 +94,7 @@ public class DraggableProjectile : DraggableObject
             UpdatePosition(m_currentPos);
         }
     }
-    public void Launch(Vector2 dirNormalized, float power = 1000f) 
+    public virtual void Launch(Vector2 dirNormalized, float power = 1000f) 
     {
         // a fixed chance to proc a launch sfx
         m_LaunchSfx?.PlayRandom(0.8f);
@@ -97,7 +102,7 @@ public class DraggableProjectile : DraggableObject
         Collider.isTrigger = false;
         Rb2d.velocity = dirNormalized * power;
     }
-    void Rebound(Vector2 normal, Vector2 relativeV) 
+    protected virtual void Rebound(Vector2 normal, Vector2 relativeV) 
     {
         Vector2 v = Rb2d.velocity;
         Vector2 reflect = v - (2f * Vector2.Dot(v, normal)) * normal;
