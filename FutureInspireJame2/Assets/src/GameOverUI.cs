@@ -23,7 +23,7 @@ public class GameOverUI : MonoBehaviour
     {
         if (m_gameOver) return;
         m_gameplayBgm.Stop();
-        m_resultText.text = "VICTORY! Thanks for Playing!";
+        m_resultText.text = "YOU WIN! Thanks for Playing!";
         m_gameOver = true;
         m_director.playableAsset = m_victorySequence;
         m_bgm?.Play();
