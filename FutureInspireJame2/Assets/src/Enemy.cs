@@ -9,17 +9,19 @@ public class BossYeetus : Enemy , IPushable
     [SerializeField] float m_chargeDuration = default;
     [SerializeField] PlayableDirector m_director = default;
     bool m_onCooldown = false;
+
+    void Update() 
+    { 
+        
+    }
     void ActivateAbility() 
     {
         m_director?.Play();
     }
-    public void UseAbility() 
-    { 
-        
-    }
     IEnumerator StartChargn() 
     {
         yield return new WaitForSeconds(m_chargeDuration);
+        ActivateAbility();
     }
 
     IEnumerator Cooldown() 
