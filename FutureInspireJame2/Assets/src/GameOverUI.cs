@@ -7,6 +7,7 @@ public class GameOverUI : MonoBehaviour
 {
     [SerializeField] EnemyWaveManager m_wave = default;
     [SerializeField] PlayerHomeBase m_base = default;
+    [SerializeField] AudioSource m_gameplayBgm = default;
     [SerializeField] TimelineAsset m_gameOverSequence = default;
     [SerializeField] TimelineAsset m_victorySequence = default;
     [SerializeField] PlayableDirector m_director = default;
@@ -21,6 +22,7 @@ public class GameOverUI : MonoBehaviour
     private void OnVictory()
     {
         if (m_gameOver) return;
+        m_gameplayBgm.Stop();
         m_resultText.text = "VICTORY! Thanks for Playing!";
         m_gameOver = true;
         m_director.playableAsset = m_victorySequence;
@@ -31,6 +33,7 @@ public class GameOverUI : MonoBehaviour
     {
         // if already game over, don't game over again
         if (m_gameOver) return;
+        m_gameplayBgm.Stop();
         m_resultText.text = "GAME OVER";
         m_gameOver = true;
         m_director.playableAsset = m_gameOverSequence;
