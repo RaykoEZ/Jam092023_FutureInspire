@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4381751891835301096}
   - component: {fileID: 1059480935076117128}
   - component: {fileID: 1219984347422381702}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BoundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
