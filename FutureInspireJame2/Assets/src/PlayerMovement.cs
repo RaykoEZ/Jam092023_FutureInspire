@@ -1,11 +1,11 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D body;
-
+    public Animator animator;
     float horizontal;
     float vertical;
     float moveLimiter = 0.7f;
@@ -21,6 +21,10 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
+
+        animator.SetFloat("Speed", Mathf.Abs(horizontal));
+        animator.SetFloat("Speed", Mathf.Abs(vertical));
+
         if (horizontal != 0 && vertical != 0) 
         {
             horizontal *= moveLimiter;
