@@ -88,9 +88,12 @@ public class EnemyWaveManager : MonoBehaviour
     {
         defeated.OnDefeat -= OnEnemyDefeated;
         m_numEnemies--;
+        // if we cleared the wave early
         if(m_numEnemies == 0 && m_currentWave < m_waves.Count && m_waitingForNextWave) 
         {
             m_waitingForNextWave = false;
+            // spawn reward
+            m_playerBase.SpawnRewardProjectiles();
             PauseWave();
             m_currentWave++;
             StartWave();

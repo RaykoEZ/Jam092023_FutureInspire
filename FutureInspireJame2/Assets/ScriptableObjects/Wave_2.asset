@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d2c7ad075cfa1d4f8926ecc720b7cdd, type: 3}
-  m_Name: Wave_0
+  m_Name: Wave_2
   m_EditorClassIdentifier: 
-  m_secondsBeforeNextWave: 30
+  m_secondsBeforeNextWave: 0
   m_groupsToSpawn:
-  - m_numToSpawn: 1
+  - m_numToSpawn: 3
+    m_spawnRef: {fileID: 8708273510983777271, guid: cef33f18ee4cff04e916d41b9b5ef3b3, type: 3}
+  - m_numToSpawn: 2
     m_spawnRef: {fileID: 8708273510983777271, guid: cef33f18ee4cff04e916d41b9b5ef3b3, type: 3}
   - m_numToSpawn: 1
-    m_spawnRef: {fileID: 8708273510983777271, guid: cef33f18ee4cff04e916d41b9b5ef3b3, type: 3}
-  - m_numToSpawn: 1
-    m_spawnRef: {fileID: 8708273510983777271, guid: cef33f18ee4cff04e916d41b9b5ef3b3, type: 3}
+    m_spawnRef: {fileID: 2886446635598671210, guid: c12a2f2184661dd429230fd1fc6dc7b4, type: 3}

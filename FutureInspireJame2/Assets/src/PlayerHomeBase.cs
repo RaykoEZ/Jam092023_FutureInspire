@@ -1,5 +1,6 @@
 using Curry.UI;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -10,6 +11,7 @@ public class PlayerHomeBase : MonoBehaviour
     [SerializeField] int m_maxHp = default;
     [SerializeField] float m_projectileSpawnInterval = default;
     [SerializeField] int m_spawnLimit = default;
+    [SerializeField] List<DraggableProjectile> m_rewardList = default;
     [SerializeField] ResourceBar m_hpBar = default;
     [SerializeField] PlayableDirector m_anim = default;
     [SerializeField] DraggableProjectile m_toSpawn = default;
@@ -37,6 +39,18 @@ public class PlayerHomeBase : MonoBehaviour
             // spawn projectile at a random position within [m_spawnRadius]
             m_spawner?.Spawn(m_toSpawn);
             m_projectilesSpawned++;
+        }
+    }
+    public void SpawnRewardProjectiles() 
+    {
+        if (m_rewardList.Count < 1) return;
+
+        int indexToSpawn;
+        int numToSpawn = Random.Range(1, 3);
+        for (int i = 0; i < numToSpawn; i++)
+        {
+            indexToSpawn = Random.Range(0, m_rewardList.Count - 1);
+            m_spawner?.Spawn(m_rewardList[indexToSpawn]);
         }
     }
     public void AttackBase() 
