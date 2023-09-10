@@ -5,7 +5,6 @@ public delegate void OnEnemyDefeat(Enemy defeated);
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour, IPushable
 {
-    [Range(0.1f, 1f)]
     [SerializeField] float m_moveInterval = default;
     Coroutine m_movement;
     Transform m_target;
