@@ -96,7 +96,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Alpha
-    path: 
+    path: StartText
     classID: 225
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -108,7 +108,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 0
+      path: 1481149446
       attribute: 1574349066
       script: {fileID: 0}
       typeID: 225
@@ -216,7 +216,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Alpha
-    path: 
+    path: StartText
     classID: 225
     script: {fileID: 0}
   m_EulerEditorCurves: []
