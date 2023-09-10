@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 8708273510983777271}
   - component: {fileID: 8708273510983777268}
   - component: {fileID: 5437428809381360138}
-  - component: {fileID: 6597819217556160429}
+  - component: {fileID: 3350309757968765550}
   m_Layer: 6
   m_Name: P_NormalEnemy
   m_TagString: Untagged
@@ -499,30 +499,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6597819217556160429
-MonoBehaviour:
+--- !u!320 &3350309757968765550
+PlayableDirector:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8708273510983777270}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57c008f954fe54a8bb972de1018a2cb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RootBone: {fileID: 4893844333810894070}
-  m_BoneTransforms:
-  - {fileID: 4893844333810894070}
-  - {fileID: 1471630356089555107}
-  - {fileID: 1139634794482018759}
-  - {fileID: 615562965769122566}
-  - {fileID: 7513119787631656297}
-  - {fileID: 888834775974012690}
-  - {fileID: 4777399934372854694}
-  m_Bounds:
-    m_Center: {x: 61.74462, y: 5.8371162, z: 0}
-    m_Extent: {x: 88.672485, y: 59.847755, z: 0}
-  m_UseBatching: 1
-  m_AlwaysUpdate: 1
-  m_AutoRebind: 0
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 313d83f34c433dc43b99a19609a18bfc, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -4960139338129978227, guid: 313d83f34c433dc43b99a19609a18bfc, type: 2}
+    value: {fileID: 0}
+  m_ExposedReferences:
+    m_References: []

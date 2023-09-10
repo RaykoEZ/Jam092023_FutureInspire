@@ -198,7 +198,6 @@ GameObject:
   - component: {fileID: 2886446635598671210}
   - component: {fileID: 2886446635598671209}
   - component: {fileID: 5063723808116253766}
-  - component: {fileID: 5316920191902539878}
   - component: {fileID: 5194993287187164706}
   m_Layer: 6
   m_Name: P_YeetusExMachina
@@ -349,36 +348,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5316920191902539878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2886446635598671211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57c008f954fe54a8bb972de1018a2cb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RootBone: {fileID: 7765216493836039047}
-  m_BoneTransforms:
-  - {fileID: 7765216493836039047}
-  - {fileID: 7543084024656075170}
-  - {fileID: 8533918661100544685}
-  - {fileID: 1311714774217069381}
-  - {fileID: 4773141553549726714}
-  - {fileID: 8184318229502031066}
-  - {fileID: 5359287953987552511}
-  - {fileID: 5691791086427610146}
-  - {fileID: 8127227321941270094}
-  - {fileID: 5163804862461770658}
-  m_Bounds:
-    m_Center: {x: 22.84851, y: 35.858505, z: 0}
-    m_Extent: {x: 314.60062, y: 256.48352, z: 0}
-  m_UseBatching: 1
-  m_AlwaysUpdate: 1
-  m_AutoRebind: 0
 --- !u!95 &5194993287187164706
 Animator:
   serializedVersion: 4
