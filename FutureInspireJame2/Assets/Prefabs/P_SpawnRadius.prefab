@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a6459f39fb88584cb5ce3db57bba5b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_previewInEditMode: 1
   m_rayCount: 32
   m_fov: 360
   m_viewRadius: 300
