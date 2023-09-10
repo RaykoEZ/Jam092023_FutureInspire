@@ -11,6 +11,7 @@ namespace Curry.Game
     [ExecuteAlways]
     public class RadialRangeRenderer : MonoBehaviour
     {
+        [SerializeField] bool m_previewInEditMode = default;
         // How many sides to generate for the circle/polygon
         [Range(1, 360)]
         [SerializeField] protected int m_rayCount = default;
@@ -37,12 +38,16 @@ namespace Curry.Game
 
         protected virtual void Awake() 
         {
-            //Setup mesh and array sizes
-            m_renderMesh = new Mesh();
-            m_renderMesh.name = "RangeMesh";
-            m_meshFilter.mesh = m_renderMesh;
-            UpdateRenderSettings();
-            RenderMesh();
+            bool isPlaying = Application.IsPlaying(gameObject);
+            if (isPlaying || (!isPlaying && m_previewInEditMode))
+            {
+                //Setup mesh and array sizes
+                m_renderMesh = new Mesh();
+                m_renderMesh.name = "RangeMesh";
+                m_meshFilter.mesh = m_renderMesh;
+                UpdateRenderSettings();
+                RenderMesh();
+            }
         }
         void UpdateRenderSettings() 
         {
@@ -53,8 +58,12 @@ namespace Curry.Game
         }
         protected virtual void OnValidate()
         {
-            UpdateRenderSettings();
-            RenderMesh();
+            bool isPlaying = Application.IsPlaying(gameObject);
+            if (isPlaying || (!isPlaying && m_previewInEditMode))
+            {
+                UpdateRenderSettings();
+                RenderMesh();
+            }
         }
         protected virtual void RenderMesh() 
         {
