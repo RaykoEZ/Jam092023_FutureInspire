@@ -530,7 +530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 709db683001bbcf42be418f20bc0878e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_moveInterval: 0.1
+  m_moveInterval: 0.2
   m_defeat: {fileID: 11400000, guid: 8bb6c0bb55b373b4c92a3780c303d886, type: 2}
   m_director: {fileID: 6672949442407012075}
   m_abilityCooldown: 10
