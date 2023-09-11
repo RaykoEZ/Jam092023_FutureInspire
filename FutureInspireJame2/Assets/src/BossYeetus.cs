@@ -29,6 +29,7 @@ public class BossYeetus : Enemy , IPushable
                 push.Push(dir, m_launchPower);
             }
         }
+        StartMoving();
     }
     IEnumerator AbilityLoop() 
     {     
@@ -48,6 +49,7 @@ public class BossYeetus : Enemy , IPushable
     }
     IEnumerator StartCharging() 
     {
+        StopMoving();
         m_anim?.SetBool("charging", true);
         m_chargingSFX?.Play();
         yield return new WaitForSeconds(m_chargeDuration);
