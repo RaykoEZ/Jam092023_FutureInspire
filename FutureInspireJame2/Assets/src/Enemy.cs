@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
 public delegate void OnEnemyDefeat(Enemy defeated);
@@ -8,6 +9,9 @@ public delegate void OnEnemyDefeat(Enemy defeated);
 public class Enemy : MonoBehaviour, IPushable
 {
     [SerializeField] float m_moveInterval = default;
+    [SerializeField] TimelineAsset m_defeat = default;
+    [SerializeField] protected PlayableDirector m_director = default;
+
     Coroutine m_movement;
     protected Transform m_target;
     public event OnEnemyDefeat OnDefeat;
@@ -24,9 +28,16 @@ public class Enemy : MonoBehaviour, IPushable
     {
         StopMoving();
         OnDefeat?.Invoke(this);
-        Destroy(gameObject);
+        StartCoroutine(Defeat_Internal());
     }
+    IEnumerator Defeat_Internal() 
+    {
+        m_director.playableAsset = m_defeat;
+        m_director.Play();
+        yield return new WaitForSeconds((float)m_defeat.duration);
+        Destroy(gameObject);
 
+    }
     public void StartMoving() 
     {
         if(m_movement == null && m_target != null) 

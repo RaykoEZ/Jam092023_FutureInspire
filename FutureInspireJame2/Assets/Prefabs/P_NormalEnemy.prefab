@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 8708273510983777268}
   - component: {fileID: 5437428809381360138}
   - component: {fileID: 6597819217556160429}
+  - component: {fileID: 7728247499363479553}
   m_Layer: 6
   m_Name: P_NormalEnemy
   m_TagString: Untagged
@@ -421,6 +422,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_moveInterval: 0.1
+  m_defeat: {fileID: 11400000, guid: a80e1268d4d8f3140bdaa88681953d4d, type: 2}
+  m_director: {fileID: 7728247499363479553}
 --- !u!61 &8708273510983777268
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -526,3 +529,22 @@ MonoBehaviour:
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
+--- !u!320 &7728247499363479553
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708273510983777270}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: a80e1268d4d8f3140bdaa88681953d4d, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 5485024251272422029, guid: a80e1268d4d8f3140bdaa88681953d4d, type: 2}
+    value: {fileID: 0}
+  m_ExposedReferences:
+    m_References: []
