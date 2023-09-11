@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour, IPushable
 {
     [Range(0.1f, 1f)]
     [SerializeField] float m_moveInterval = default;
+    [SerializeField] private ParticleSystem explosion = default;
     Coroutine m_movement;
     Transform m_target;
     public event OnEnemyDefeat OnDefeat;
@@ -76,6 +77,8 @@ public class Enemy : MonoBehaviour, IPushable
     IEnumerator DestroyAfterTimeline()
     {
         yield return new WaitForSeconds((float)playableDirector.duration);
+        Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
+        explosion.Play();
         Destroy(gameObject);
     }
 }
