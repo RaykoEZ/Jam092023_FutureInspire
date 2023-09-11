@@ -11,6 +11,7 @@ public class EnemyWaveManager : MonoBehaviour
     [SerializeField] List<EnemySpawner> m_spawners = default;
     [SerializeField] PlayerHomeBase m_playerBase;
     [SerializeField] PlayableDirector m_countdownDirector = default;
+    [SerializeField] AudioClip m_finalWave = default;
     [SerializeField] AudioSource m_gameplayBgm = default;
 
     Coroutine m_spawnWave;
@@ -83,6 +84,13 @@ public class EnemyWaveManager : MonoBehaviour
     }
     void InitEnenmy(Enemy spawned) 
     {
+        if(spawned is BossYeetus) 
+        {
+            m_gameplayBgm.Stop();
+            m_gameplayBgm.clip = m_finalWave;
+            m_gameplayBgm.Play();
+        }
+
         spawned.Init(m_playerBase.transform);
         spawned.OnDefeat += OnEnemyDefeated;
     }
