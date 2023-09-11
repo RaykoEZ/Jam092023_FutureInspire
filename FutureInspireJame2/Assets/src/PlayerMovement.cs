@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IPushable
 {
     Rigidbody2D body;
     public Animator animator;
@@ -48,5 +48,10 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 180, 0);
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
+    }
+
+    public void Push(Vector2 dir, float power)
+    {
+        GetComponent<Rigidbody2D>()?.AddForce(dir * power, ForceMode2D.Impulse);
     }
 }

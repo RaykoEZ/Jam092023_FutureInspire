@@ -19,13 +19,26 @@ public class BossYeetus : Enemy , IPushable
     public void Yeet() 
     {
         Vector2 dir = (m_target.position - transform.position).normalized;
+        Vector2 resultDir;
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, m_abilityRadius, Vector2.zero, 
             0f, LayerMask.GetMask(s_enemyCheckLayer));
-        foreach(var hit in hits) 
-        { 
+        float power;
+        bool isPlayer;
+        foreach (var hit in hits) 
+        {           
             if (hit.collider.gameObject != gameObject && hit.collider.TryGetComponent(out IPushable push)) 
             {
-                push.Push(dir, m_launchPower);
+                if(push is PlayerMovement) 
+                {
+                    power = 100000f * m_launchPower;
+                    resultDir = (hit.collider.transform.position - transform.position).normalized;
+                }
+                else 
+                {
+                    power = m_launchPower;
+                    resultDir = dir;
+                }
+                push.Push(resultDir, power);
             }
         }
         StartMoving();
