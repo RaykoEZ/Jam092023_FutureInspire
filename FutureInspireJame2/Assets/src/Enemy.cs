@@ -1,35 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Playables;
-
-public class BossYeetus : Enemy , IPushable
-{
-    [SerializeField] float m_abilityCooldown = default;
-    [SerializeField] float m_chargeDuration = default;
-    [SerializeField] PlayableDirector m_director = default;
-    bool m_onCooldown = false;
-
-    void Update() 
-    { 
-        
-    }
-    void ActivateAbility() 
-    {
-        m_director?.Play();
-    }
-    IEnumerator StartChargn() 
-    {
-        yield return new WaitForSeconds(m_chargeDuration);
-        ActivateAbility();
-    }
-
-    IEnumerator Cooldown() 
-    {
-        yield return new WaitForSeconds(m_abilityCooldown);
-    }
-
-}
+using UnityEngine.Timeline;
 
 public delegate void OnEnemyDefeat(Enemy defeated);
 [RequireComponent(typeof(Rigidbody2D))]

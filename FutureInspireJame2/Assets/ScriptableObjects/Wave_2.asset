@@ -19,4 +19,4 @@ MonoBehaviour:
   - m_numToSpawn: 2
     m_spawnRef: {fileID: 8708273510983777271, guid: cef33f18ee4cff04e916d41b9b5ef3b3, type: 3}
   - m_numToSpawn: 1
-    m_spawnRef: {fileID: 2886446635598671210, guid: c12a2f2184661dd429230fd1fc6dc7b4, type: 3}
+    m_spawnRef: {fileID: -2383981652991674080, guid: c12a2f2184661dd429230fd1fc6dc7b4, type: 3}
