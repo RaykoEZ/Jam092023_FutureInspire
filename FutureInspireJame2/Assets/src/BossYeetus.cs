@@ -10,7 +10,6 @@ public class BossYeetus : Enemy , IPushable
     [SerializeField] float m_launchPower = default;
     [SerializeField] Animator m_anim = default;
     [SerializeField] AudioSource m_chargingSFX = default;
-    [SerializeField] PlayableDirector m_director = default;
     float m_abilityTimer = 0f;
     static readonly string[] s_enemyCheckLayer = new string[] { "Enemy"};
     protected void Start() 

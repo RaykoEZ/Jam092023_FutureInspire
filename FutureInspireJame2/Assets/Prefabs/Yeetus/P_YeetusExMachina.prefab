@@ -413,6 +413,12 @@ PlayableDirector:
     value: {fileID: 453823591045272062}
   - key: {fileID: -1520088728120985560, guid: caaaf0af3947659429fb4cf10d248ef3, type: 2}
     value: {fileID: 2886446635598671211}
+  - key: {fileID: -7349125665000792206, guid: 8bb6c0bb55b373b4c92a3780c303d886, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 3529449427880221860, guid: 8bb6c0bb55b373b4c92a3780c303d886, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 3231960903078125270, guid: 8bb6c0bb55b373b4c92a3780c303d886, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!82 &453823591045272062
@@ -524,13 +530,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_moveInterval: 0.1
+  m_defeat: {fileID: 11400000, guid: 8bb6c0bb55b373b4c92a3780c303d886, type: 2}
+  m_director: {fileID: 6672949442407012075}
   m_abilityCooldown: 10
   m_chargeDuration: 3
   m_abilityRadius: 300
   m_launchPower: 2500
   m_anim: {fileID: 5194993287187164706}
   m_chargingSFX: {fileID: 453823591045272062}
-  m_director: {fileID: 6672949442407012075}
 --- !u!114 &4380522222380147978
 MonoBehaviour:
   m_ObjectHideFlags: 0
