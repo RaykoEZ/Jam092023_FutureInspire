@@ -56,9 +56,11 @@ public class EnemyWaveManager : MonoBehaviour
             EnemyWaveDetail wave = m_waves[m_currentWave];
             // Choose random spawners from list of spawner
             List<EnemySpawner> spawners = SamplingUtil.SampleFromList(
-                m_spawners, wave.GroupsToSpawn.Count, uniqueResults: false);
+                m_spawners, wave.GroupsToSpawn.Count, uniqueResults: true);
             int i = 0;
             OnStart?.Invoke(m_currentWave + 1);
+            // spawn reward
+            m_playerBase.SpawnRewardProjectiles();
             // wait for wave countdown
             yield return new WaitForSeconds(3f);
             foreach (var group in wave.GroupsToSpawn)
